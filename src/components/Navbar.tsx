@@ -3,9 +3,13 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Menu, X, Facebook, Instagram } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
+import { useLanguage } from '@/i18n/LanguageContext';
+import { LanguageSelector } from './LanguageSelector';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { t } = useLanguage();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -62,11 +66,15 @@ const Navbar = () => {
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-1">
-          <NavItem to="/">Home</NavItem>
-          <NavItem to="/qualifications">Qualifikationen</NavItem>
-          <NavItem to="/english">English</NavItem>
-          <NavItem to="/contact">Kontakt</NavItem>
+        <nav className="hidden md:flex items-center space-x-1">
+          <LanguageSelector />
+          <div className="ml-4">
+            <NavItem to="/">{t('nav.home')}</NavItem>
+            <NavItem to="/qualifications">{t('nav.qualifications')}</NavItem>
+            <NavItem to="/english">English</NavItem>
+            <NavItem to="/contact">{t('nav.contact')}</NavItem>
+            <Button variant="outline" className="ml-4" onClick={() => {}}>{t('nav.login')}</Button>
+          </div>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -83,10 +91,14 @@ const Navbar = () => {
       {isMenuOpen && (
         <div className="md:hidden bg-white border-t">
           <div className="flex flex-col py-4 px-4 space-y-4">
-            <NavItem to="/">Home</NavItem>
-            <NavItem to="/qualifications">Qualifikationen</NavItem>
+            <div className="self-start">
+              <LanguageSelector />
+            </div>
+            <NavItem to="/">{t('nav.home')}</NavItem>
+            <NavItem to="/qualifications">{t('nav.qualifications')}</NavItem>
             <NavItem to="/english">English</NavItem>
-            <NavItem to="/contact">Kontakt</NavItem>
+            <NavItem to="/contact">{t('nav.contact')}</NavItem>
+            <Button variant="outline" className="mt-2" onClick={() => {}}>{t('nav.login')}</Button>
           </div>
         </div>
       )}
