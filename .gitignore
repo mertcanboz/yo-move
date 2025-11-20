@@ -25,3 +25,6 @@ dist-ssr
 
 # Terraform
 .terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.backup
